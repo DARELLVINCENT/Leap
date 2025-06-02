@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - CV Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+      width: 320px;
+    }
+    .login-card h3 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: #0d3b66;
+      letter-spacing: 1px;
+    }
+    .form-control {
+      border-radius: 0.5rem;
+      padding-left: 2.5rem;
+      height: 45px;
+      transition: all 0.3s ease;
+      border: 1.5px solid #0d3b66;
+    }
+    .form-control:focus {
+      border-color: #0a78d1;
+      box-shadow: 0 0 8px #60a5fa;
+      outline: none;
+    }
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      color: #0d3b66;
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+    .position-relative {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+    .btn-login {
+      background: #0a78d1;
+      border: none;
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 0.5rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .btn-login:hover {
+      background: #095bb5;
+    }
+    .alert {
+      font-size: 0.9rem;
+    }
+  </style>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="login-card">
+    <h3>Login to Dashboard</h3>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} text-center" role="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="position-relative">
+        <i class="bx bx-user input-icon"></i>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required />
+      </div>
+      <div class="position-relative">
+        <i class="bx bx-lock-alt input-icon"></i>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn btn-login">Login</button>
+    </form>
+  </div>
+</body>
+</html>
